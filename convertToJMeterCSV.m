@@ -7,7 +7,7 @@ samplesTable = activityTable(activityTable.Objective == categorical({'sample'}),
 nrows = size(samplesTable, 1);
 
 % Trim the table and change variable names to comply with JMeter CSV format
-measuredVariableName = result.MeasuredVariableName;
+measuredVariableName = Results.MeasuredVariableName;
 samplesTable = samplesTable(:, {'Timestamp', measuredVariableName, 'Name', 'Passed'});
 samplesTable.Properties.VariableNames = {'timeStamp', 'elapsed', 'label', 'success'};
 
