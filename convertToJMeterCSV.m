@@ -1,3 +1,4 @@
+function convertToJMeterCSV(Results)
 % CONVERTMEASUREMENTRESULTTOJMETERCSV converts and writes
 % the MeasurementResult RESULT to a comma-delimited text CSV file
 % in JMeter output format.
