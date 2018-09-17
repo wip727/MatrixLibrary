@@ -1,25 +1,29 @@
 classdef tMatrixLibrary < matlab.perftest.TestCase
     
     properties(TestParameter)
-        TestMatrix = struct('midSize', magic(500),...
-            'largeSize', magic(1000));
+        TestMatrix = struct('smallSize', magic(100), 'midSize', magic(600),...
+            'largeSize', magic(1000), 'NonSquare', reshape(magic(600), [300, 1200]));
     end
     
     methods(Test)
-        function testSum(~, TestMatrix)
-            matrix_sum(TestMatrix);
+        function testSum(testCase, TestMatrix)
+            while testCase.keepMeasuring
+                matrix_sum(TestMatrix);
+            end
         end
         
-        function testMean(~, TestMatrix)
-            matrix_mean(TestMatrix);
+        function testMean(testCase, TestMatrix)
+            while testCase.keepMeasuring
+                matrix_mean(TestMatrix);
+            end
         end
         
         function testEig(testCase, TestMatrix)
             % Eig only works on square matrix
-            testCase.assertTrue(size(TestMatrix,1) == size(TestMatrix,2));
-            testCase.startMeasuring;
-            matrix_eig(TestMatrix);
-            testCase.stopMeasuring;
+            testCase.assumeTrue(size(TestMatrix,1) == size(TestMatrix,2));
+            while testCase.keepMeasuring
+                matrix_eig(TestMatrix);
+            end
         end
     end
 end
